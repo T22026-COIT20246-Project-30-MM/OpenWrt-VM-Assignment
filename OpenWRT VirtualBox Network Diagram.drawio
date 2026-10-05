@@ -1,0 +1,669 @@
+<mxfile host="app.diagrams.net" pages="2">
+  <diagram name="Page-1" id="d1Q4IRysjrG7fauHrdIq">
+    <mxGraphModel dx="1894" dy="1013" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <UserObject label="" plantUmlData="{&#xa;  &quot;data&quot;: &quot;@startuml\ntitle COIT20246 - OpenWrt VirtualBox Lab Network Diagram\n\nskinparam backgroundColor white\nskinparam shadowing false\nskinparam defaultFontName Arial\n\nskinparam node {\n    BackgroundColor #E8F1FB\n    BorderColor #2F5597\n    FontColor #1F1F1F\n}\n\nskinparam rectangle {\n    BackgroundColor #F7F7F7\n    BorderColor #555555\n    FontColor #1F1F1F\n}\n\nskinparam cloud {\n    BackgroundColor #EAF4EA\n    BorderColor #548235\n}\n\nskinparam database {\n    BackgroundColor #FFF2CC\n    BorderColor #BF9000\n}\n\nskinparam arrow {\n    Color #444444\n    Thickness 2\n}\n\n&#39; =========================\n&#39; INTERNET / NAT SIDE\n&#39; =========================\n\ncloud \&quot;Internet\&quot; as INTERNET\n\nnode \&quot;VirtualBox\\nNAT Network\\nAdapter 2\&quot; as NAT {\n    rectangle \&quot;NAT\\n10.0.3.0/24\&quot; as NATNET\n}\n\nnode \&quot;OpenWrt VM\\nOpenWrt 22.03.3\&quot; as OPENWRT {\n    \n    rectangle \&quot;eth1\\nNAT Interface\\nIP: 10.0.3.15/24\\nMAC: 08:00:27:A8:F2:21\&quot; as ETH1\n    \n    rectangle \&quot;eth0\\nHost-only Interface\\nNo direct IP\\nMAC: 08:00:27:8C:E5:FF\&quot; as ETH0\n    \n    rectangle \&quot;br-mng\\nManagement Bridge\\nIP: 192.168.56.2/24\&quot; as BR\n    \n    rectangle \&quot;uhttpd Web Server\\nHTTP: TCP/80\&quot; as WEB\n    \n    rectangle \&quot;OpenWrt Management\\nTCP/81*\&quot; as MGMT\n    \n    ETH0 --&gt; BR\n    BR --&gt; WEB\n    BR --&gt; MGMT\n}\n\nINTERNET --&gt; NATNET\nNATNET --&gt; ETH1\n\n&#39; =========================\n&#39; HOST-ONLY SIDE\n&#39; =========================\n\nrectangle \&quot;VirtualBox\\nHost-only Network\\n192.168.56.0/24\&quot; as HOSTONLY\n\nnode \&quot;Windows Host\&quot; as WINDOWS {\n    rectangle \&quot;Ethernet 2\\nHost-only Adapter\\nIP: 192.168.56.1/24\&quot; as WINETH\n}\n\nWINDOWS --&gt; HOSTONLY\nHOSTONLY --&gt; BR\n\n&#39; =========================\n&#39; CONNECTION LABELS\n&#39; =========================\n\nETH1 -[hidden]- ETH0\n\nnote right of NAT\nVirtualBox Adapter 2\nAttached to: NAT\nend note\n\nnote left of HOSTONLY\nVirtualBox Adapter 1\nAttached to:\nHost-only Adapter\nend note\n\nnote bottom of OPENWRT\neth0 → br-mng\neth1 → NAT\n\nThe Windows host accesses\nOpenWrt through:\n192.168.56.1 → 192.168.56.2\nend note\n\nlegend right\n|= Component |= Configuration |\n| Windows Host | 192.168.56.1/24 |\n| OpenWrt br-mng | 192.168.56.2/24 |\n| OpenWrt eth0 | Host-only, no direct IP |\n| OpenWrt eth1 | 10.0.3.15/24, NAT |\n| VirtualBox Adapter 1 | Host-only |\n| VirtualBox Adapter 2 | NAT |\n| HTTP | TCP 80 |\n| Management | TCP 81* |\n\n* Port 81 is the assignment-required management interface\nand should be verified against the actual OpenWrt configuration.\n\nendlegend\n\n@enduml&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="LuQUXwOpF0KlzinZOJzt-1">
+          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=10;" vertex="1">
+            <mxGeometry as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="VirtualBox&#xa;NAT Network&#xa;Adapter 2" plantUmlId="c_0" plantUmlBaseStyle="shape=cube;size=10;fillColor=#E8F1FB;strokeColor=#2F5597;verticalAlign=top;align=center;spacingTop=12;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" plantUmlBaseValue="VirtualBox&#xa;NAT Network&#xa;Adapter 2" id="LuQUXwOpF0KlzinZOJzt-2">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-1" style="shape=cube;size=10;fillColor=#E8F1FB;strokeColor=#2F5597;verticalAlign=top;align=center;spacingTop=12;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="162.63" width="155" x="30" y="280.88" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="NAT&#xa;10.0.3.0/24" plantUmlId="n_1" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=1;fillColor=#F7F7F7;strokeColor=#555555;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" plantUmlBaseValue="NAT&#xa;10.0.3.0/24" id="LuQUXwOpF0KlzinZOJzt-3">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-2" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=1;fillColor=#F7F7F7;strokeColor=#555555;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="49" width="115" x="15" y="70" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="OpenWrt VM&#xa;OpenWrt 22.03.3" plantUmlId="c_2" plantUmlBaseStyle="shape=cube;size=10;fillColor=#E8F1FB;strokeColor=#2F5597;verticalAlign=top;align=center;spacingTop=12;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" plantUmlBaseValue="OpenWrt VM&#xa;OpenWrt 22.03.3" id="LuQUXwOpF0KlzinZOJzt-4">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-1" style="shape=cube;size=10;fillColor=#E8F1FB;strokeColor=#2F5597;verticalAlign=top;align=center;spacingTop=12;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="518" width="418" x="105.87" y="440.01" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="eth1&#xa;NAT Interface&#xa;IP: 10.0.3.15/24&#xa;MAC: 08:00:27:A8:F2:21" plantUmlId="n_3" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=1;fillColor=#F7F7F7;strokeColor=#555555;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" plantUmlBaseValue="eth1&#xa;NAT Interface&#xa;IP: 10.0.3.15/24&#xa;MAC: 08:00:27:A8:F2:21" id="LuQUXwOpF0KlzinZOJzt-5">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-4" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=1;fillColor=#F7F7F7;strokeColor=#555555;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="78" width="190" x="15" y="55" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="eth0&#xa;Host-only Interface&#xa;No direct IP&#xa;MAC: 08:00:27:8C:E5:FF" plantUmlId="n_4" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=1;fillColor=#F7F7F7;strokeColor=#555555;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" plantUmlBaseValue="eth0&#xa;Host-only Interface&#xa;No direct IP&#xa;MAC: 08:00:27:8C:E5:FF" id="LuQUXwOpF0KlzinZOJzt-6">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-4" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=1;fillColor=#F7F7F7;strokeColor=#555555;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="78" width="190" x="38.43" y="193" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="br-mng&#xa;Management Bridge&#xa;IP: 192.168.56.2/24" plantUmlId="n_5" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=1;fillColor=#F7F7F7;strokeColor=#555555;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" plantUmlBaseValue="br-mng&#xa;Management Bridge&#xa;IP: 192.168.56.2/24" id="LuQUXwOpF0KlzinZOJzt-7">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-4" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=1;fillColor=#F7F7F7;strokeColor=#555555;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="62" width="170" x="132.59" y="331" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="uhttpd Web Server&#xa;HTTP: TCP/80" plantUmlId="n_6" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=1;fillColor=#F7F7F7;strokeColor=#555555;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" plantUmlBaseValue="uhttpd Web Server&#xa;HTTP: TCP/80" id="LuQUXwOpF0KlzinZOJzt-8">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-4" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=1;fillColor=#F7F7F7;strokeColor=#555555;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="49" width="162" x="231" y="453" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="OpenWrt Management&#xa;TCP/81*" plantUmlId="n_7" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=1;fillColor=#F7F7F7;strokeColor=#555555;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" plantUmlBaseValue="OpenWrt Management&#xa;TCP/81*" id="LuQUXwOpF0KlzinZOJzt-9">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-4" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=1;fillColor=#F7F7F7;strokeColor=#555555;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="49" width="181" x="15" y="453" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_12" plantUmlBaseStyle="strokeColor=#444444;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-14">
+          <mxCell edge="1" parent="LuQUXwOpF0KlzinZOJzt-4" source="LuQUXwOpF0KlzinZOJzt-6" style="strokeColor=#444444;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="LuQUXwOpF0KlzinZOJzt-7">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_13" plantUmlBaseStyle="strokeColor=#444444;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-15">
+          <mxCell edge="1" parent="LuQUXwOpF0KlzinZOJzt-4" source="LuQUXwOpF0KlzinZOJzt-7" style="strokeColor=#444444;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="LuQUXwOpF0KlzinZOJzt-8">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_14" plantUmlBaseStyle="strokeColor=#444444;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-16">
+          <mxCell edge="1" parent="LuQUXwOpF0KlzinZOJzt-4" source="LuQUXwOpF0KlzinZOJzt-7" style="strokeColor=#444444;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="LuQUXwOpF0KlzinZOJzt-9">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Windows Host" plantUmlId="c_8" plantUmlBaseStyle="shape=cube;size=10;fillColor=#E8F1FB;strokeColor=#2F5597;verticalAlign=top;align=center;spacingTop=12;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" plantUmlBaseValue="Windows Host" id="LuQUXwOpF0KlzinZOJzt-10">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-1" style="shape=cube;size=10;fillColor=#E8F1FB;strokeColor=#2F5597;verticalAlign=top;align=center;spacingTop=12;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="171.13" width="207" x="379.34000000000003" y="66" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Ethernet 2&#xa;Host-only Adapter&#xa;IP: 192.168.56.1/24" plantUmlId="n_9" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=1;fillColor=#F7F7F7;strokeColor=#555555;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" plantUmlBaseValue="Ethernet 2&#xa;Host-only Adapter&#xa;IP: 192.168.56.1/24" id="LuQUXwOpF0KlzinZOJzt-11">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-10" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=1;fillColor=#F7F7F7;strokeColor=#555555;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="62" width="167" x="15" y="40" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Internet" plantUmlId="n_10" plantUmlBaseStyle="shape=cloud;fillColor=#EAF4EA;strokeColor=#548235;whiteSpace=wrap;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Internet" id="LuQUXwOpF0KlzinZOJzt-12">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-1" style="shape=cloud;fillColor=#EAF4EA;strokeColor=#548235;whiteSpace=wrap;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="49" width="92" x="56.95" y="188.13" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="VirtualBox&#xa;Host-only Network&#xa;192.168.56.0/24" plantUmlId="n_11" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=1;fillColor=#F7F7F7;strokeColor=#555555;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" plantUmlBaseValue="VirtualBox&#xa;Host-only Network&#xa;192.168.56.0/24" id="LuQUXwOpF0KlzinZOJzt-13">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-1" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=1;fillColor=#F7F7F7;strokeColor=#555555;whiteSpace=wrap;shadow=0;fontColor=#1F1F1F;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="62" width="162" x="401.34000000000003" y="331.19" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_15" plantUmlBaseStyle="strokeColor=#444444;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-17">
+          <mxCell edge="1" parent="LuQUXwOpF0KlzinZOJzt-1" source="LuQUXwOpF0KlzinZOJzt-12" style="strokeColor=#444444;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="LuQUXwOpF0KlzinZOJzt-3">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_16" plantUmlBaseStyle="strokeColor=#444444;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-18">
+          <mxCell edge="1" parent="LuQUXwOpF0KlzinZOJzt-1" source="LuQUXwOpF0KlzinZOJzt-3" style="strokeColor=#444444;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="LuQUXwOpF0KlzinZOJzt-5">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_17" plantUmlBaseStyle="strokeColor=#444444;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-19">
+          <mxCell edge="1" parent="LuQUXwOpF0KlzinZOJzt-1" source="LuQUXwOpF0KlzinZOJzt-10" style="strokeColor=#444444;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="LuQUXwOpF0KlzinZOJzt-13">
+            <mxGeometry relative="1" as="geometry">
+              <mxPoint x="482.84" y="237.13" as="sourcePoint" />
+              <mxPoint x="482.84" y="331.19" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_18" plantUmlBaseStyle="strokeColor=#444444;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=1;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-20">
+          <mxCell edge="1" parent="LuQUXwOpF0KlzinZOJzt-1" source="LuQUXwOpF0KlzinZOJzt-13" style="strokeColor=#444444;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=1;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="LuQUXwOpF0KlzinZOJzt-7">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="351.8" y="460.57" />
+                <mxPoint x="351.8" y="534.01" />
+                <mxPoint x="351.8" y="672.01" />
+              </Array>
+              <mxPoint x="482.84" y="394.19" as="sourcePoint" />
+              <mxPoint x="351.8" y="771.01" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="VirtualBox Adapter 2&#xa;Attached to: NAT" plantUmlId="note_19" plantUmlBaseStyle="shape=note;size=10;fillColor=#FEFFDD;strokeColor=#181818;fontSize=13;whiteSpace=wrap;align=left;spacingLeft=4;shadow=0;fontFamily=Arial;" plantUmlBaseValue="VirtualBox Adapter 2&#xa;Attached to: NAT" id="LuQUXwOpF0KlzinZOJzt-21">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-1" style="shape=note;size=10;fillColor=#FEFFDD;strokeColor=#181818;fontSize=13;whiteSpace=wrap;align=left;spacingLeft=4;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="41" width="146" x="220.03" y="341.69" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="noteptr_20" plantUmlBaseStyle="shape=triangle;fillColor=#FEFFDD;strokeColor=#181818;strokeWidth=0.5;shadow=0;fontFamily=Arial;direction=west;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-22">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-1" style="shape=triangle;fillColor=#FEFFDD;strokeColor=#181818;strokeWidth=0.5;shadow=0;fontFamily=Arial;direction=west;" vertex="1">
+            <mxGeometry height="8" width="36.03" x="185" y="358.69" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="VirtualBox Adapter 1&#xa;Attached to:&#xa;Host-only Adapter" plantUmlId="note_21" plantUmlBaseStyle="shape=note;size=10;fillColor=#FEFFDD;strokeColor=#181818;fontSize=13;whiteSpace=wrap;align=left;spacingLeft=4;shadow=0;fontFamily=Arial;" plantUmlBaseValue="VirtualBox Adapter 1&#xa;Attached to:&#xa;Host-only Adapter" id="LuQUXwOpF0KlzinZOJzt-23">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-1" style="shape=note;size=10;fillColor=#FEFFDD;strokeColor=#181818;fontSize=13;whiteSpace=wrap;align=left;spacingLeft=4;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="56" width="146" x="220" y="334.69" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="noteptr_22" plantUmlBaseStyle="shape=triangle;fillColor=#FEFFDD;strokeColor=#181818;strokeWidth=0.5;shadow=0;fontFamily=Arial;direction=east;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-24">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-1" style="shape=triangle;fillColor=#FEFFDD;strokeColor=#181818;strokeWidth=0.5;shadow=0;fontFamily=Arial;direction=east;" vertex="1">
+            <mxGeometry height="8" width="36.34" x="365" y="358.69" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="eth0 → br-mng&#xa;eth1 → NAT&#xa;&#xa;The Windows host accesses&#xa;OpenWrt through:&#xa;192.168.56.1 → 192.168.56.2" plantUmlId="note_23" plantUmlBaseStyle="shape=note;size=10;fillColor=#FEFFDD;strokeColor=#181818;fontSize=13;whiteSpace=wrap;align=left;spacingLeft=4;shadow=0;fontFamily=Arial;" plantUmlBaseValue="eth0 → br-mng&#xa;eth1 → NAT&#xa;&#xa;The Windows host accesses&#xa;OpenWrt through:&#xa;192.168.56.1 → 192.168.56.2" id="LuQUXwOpF0KlzinZOJzt-25">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-1" style="shape=note;size=10;fillColor=#FEFFDD;strokeColor=#181818;fontSize=13;whiteSpace=wrap;align=left;spacingLeft=4;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="102" width="193" x="97.91" y="1002.01" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="noteptr_24" plantUmlBaseStyle="shape=triangle;fillColor=#FEFFDD;strokeColor=#181818;strokeWidth=0.5;shadow=0;fontFamily=Arial;direction=north;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-26">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-1" style="shape=triangle;fillColor=#FEFFDD;strokeColor=#181818;strokeWidth=0.5;shadow=0;fontFamily=Arial;direction=north;" vertex="1">
+            <mxGeometry height="36" width="8" x="189.91" y="967.01" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="COIT20246 - OpenWrt VirtualBox Lab Network Diagram" plantUmlId="title_25" plantUmlBaseStyle="text;html=1;fillColor=none;strokeColor=none;fontSize=14;fontStyle=1;fontColor=#000000;align=center;verticalAlign=middle;fontFamily=Arial;" plantUmlBaseValue="COIT20246 - OpenWrt VirtualBox Lab Network Diagram" id="LuQUXwOpF0KlzinZOJzt-27">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-1" style="text;html=1;fillColor=none;strokeColor=none;fontSize=14;fontStyle=1;fontColor=#000000;align=center;verticalAlign=middle;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="24" width="393" x="188.17000000000002" y="30" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legend_0" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=15;fillColor=#DDDDDD;strokeColor=#000000;strokeWidth=1;fontColor=#000000;fontSize=14;align=left;verticalAlign=top;spacing=0;spacingLeft=5;spacingTop=5;whiteSpace=wrap;html=1;container=1;collapsible=0;shadow=0;fontFamily=Arial;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-28">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-1" style="rounded=1;absoluteArcSize=1;arcSize=15;fillColor=#DDDDDD;strokeColor=#000000;strokeWidth=1;fontColor=#000000;fontSize=14;align=left;verticalAlign=top;spacing=0;spacingLeft=5;spacingTop=5;whiteSpace=wrap;html=1;container=1;collapsible=0;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="244" width="451" x="135" y="1110" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendtable_1" plantUmlBaseStyle="shape=table;childLayout=tableLayout;container=1;collapsible=0;startSize=0;rowLines=1;fixedRows=1;resizeLast=1;fillColor=none;strokeColor=#000000;strokeWidth=1;fontSize=14;whiteSpace=wrap;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-29">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-28" style="shape=table;childLayout=tableLayout;container=1;collapsible=0;startSize=0;rowLines=1;fixedRows=1;resizeLast=1;fillColor=none;strokeColor=#000000;strokeWidth=1;fontSize=14;whiteSpace=wrap;" vertex="1">
+            <mxGeometry height="162" width="313" x="5" y="7" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_2" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-30">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-29" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="313" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Component" plantUmlId="legendcell_3" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;fontStyle=1;" plantUmlBaseValue="Component" id="LuQUXwOpF0KlzinZOJzt-31">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-30" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;fontStyle=1;" vertex="1">
+            <mxGeometry height="18" width="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Configuration" plantUmlId="legendcell_4" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;fontStyle=1;" plantUmlBaseValue="Configuration" id="LuQUXwOpF0KlzinZOJzt-32">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-30" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;fontStyle=1;" vertex="1">
+            <mxGeometry height="18" width="163" x="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_5" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-33">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-29" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="313" y="18" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Windows Host" plantUmlId="legendcell_6" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="Windows Host" id="LuQUXwOpF0KlzinZOJzt-34">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-33" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="192.168.56.1/24" plantUmlId="legendcell_7" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="192.168.56.1/24" id="LuQUXwOpF0KlzinZOJzt-35">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-33" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="163" x="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_8" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-36">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-29" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="313" y="36" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="OpenWrt br-mng" plantUmlId="legendcell_9" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="OpenWrt br-mng" id="LuQUXwOpF0KlzinZOJzt-37">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-36" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="192.168.56.2/24" plantUmlId="legendcell_10" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="192.168.56.2/24" id="LuQUXwOpF0KlzinZOJzt-38">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-36" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="163" x="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_11" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-39">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-29" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="313" y="54" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="OpenWrt eth0" plantUmlId="legendcell_12" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="OpenWrt eth0" id="LuQUXwOpF0KlzinZOJzt-40">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-39" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Host-only, no direct IP" plantUmlId="legendcell_13" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="Host-only, no direct IP" id="LuQUXwOpF0KlzinZOJzt-41">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-39" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="163" x="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_14" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-42">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-29" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="313" y="72" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="OpenWrt eth1" plantUmlId="legendcell_15" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="OpenWrt eth1" id="LuQUXwOpF0KlzinZOJzt-43">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-42" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="10.0.3.15/24, NAT" plantUmlId="legendcell_16" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="10.0.3.15/24, NAT" id="LuQUXwOpF0KlzinZOJzt-44">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-42" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="163" x="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_17" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-45">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-29" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="313" y="90" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="VirtualBox Adapter 1" plantUmlId="legendcell_18" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="VirtualBox Adapter 1" id="LuQUXwOpF0KlzinZOJzt-46">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-45" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Host-only" plantUmlId="legendcell_19" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="Host-only" id="LuQUXwOpF0KlzinZOJzt-47">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-45" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="163" x="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_20" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-48">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-29" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="313" y="108" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="VirtualBox Adapter 2" plantUmlId="legendcell_21" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="VirtualBox Adapter 2" id="LuQUXwOpF0KlzinZOJzt-49">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-48" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="NAT" plantUmlId="legendcell_22" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="NAT" id="LuQUXwOpF0KlzinZOJzt-50">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-48" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="163" x="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_23" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-51">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-29" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="313" y="126" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="HTTP" plantUmlId="legendcell_24" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="HTTP" id="LuQUXwOpF0KlzinZOJzt-52">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-51" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="TCP 80" plantUmlId="legendcell_25" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="TCP 80" id="LuQUXwOpF0KlzinZOJzt-53">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-51" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="163" x="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_26" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="LuQUXwOpF0KlzinZOJzt-54">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-29" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="313" y="144" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Management" plantUmlId="legendcell_27" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="Management" id="LuQUXwOpF0KlzinZOJzt-55">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-54" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="TCP 81*" plantUmlId="legendcell_28" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="TCP 81*" id="LuQUXwOpF0KlzinZOJzt-56">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-54" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="163" x="150" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;br&gt;* Port 81 is the assignment-required management interface&lt;br&gt;and should be verified against the actual OpenWrt configuration.&lt;br&gt;" plantUmlId="legendtext_29" plantUmlBaseStyle="text;html=1;strokeColor=none;fillColor=none;fontColor=#000000;fontSize=14;align=left;verticalAlign=top;spacing=0;whiteSpace=wrap;fontFamily=Arial;" plantUmlBaseValue="&lt;br&gt;* Port 81 is the assignment-required management interface&lt;br&gt;and should be verified against the actual OpenWrt configuration.&lt;br&gt;" id="LuQUXwOpF0KlzinZOJzt-57">
+          <mxCell parent="LuQUXwOpF0KlzinZOJzt-28" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#000000;fontSize=14;align=left;verticalAlign=top;spacing=0;whiteSpace=wrap;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="68" width="441" x="5" y="171" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="DiBcemMk8P3IwuL2kXQK" name="Page-2">
+    <mxGraphModel dx="1894" dy="1013" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <UserObject label="" plantUmlData="{&#xa;  &quot;data&quot;: &quot;@startuml\ntitle COIT20246 - Proposed Small Business Production Network\n\n&#39; =========================================================\n&#39; GENERAL STYLING\n&#39; =========================================================\n\nskinparam backgroundColor white\nskinparam shadowing false\nskinparam defaultFontName Arial\nskinparam componentStyle rectangle\n\nskinparam rectangle {\n    BackgroundColor #F8F9FA\n    BorderColor #343A40\n    BorderThickness 2\n    FontColor #212529\n}\n\nskinparam node {\n    BackgroundColor #EAF2F8\n    BorderColor #2874A6\n    BorderThickness 2\n    FontColor #212529\n}\n\nskinparam cloud {\n    BackgroundColor #E8F8F5\n    BorderColor #138D75\n    BorderThickness 2\n}\n\nskinparam database {\n    BackgroundColor #FEF5E7\n    BorderColor #B9770E\n    BorderThickness 2\n}\n\nskinparam arrow {\n    Color #34495E\n    Thickness 2\n}\n\n&#39; =========================================================\n&#39; INTERNET\n&#39; =========================================================\n\ncloud \&quot;INTERNET\\nExternal Network\&quot; as INTERNET\n\ncloud \&quot;ISP\\nInternet Service Provider\&quot; as ISP\n\nINTERNET --&gt; ISP : Internet connection\n\n&#39; =========================================================\n&#39; BUSINESS ROUTER / FIREWALL\n&#39; =========================================================\n\nnode \&quot;OpenWrt Router / Firewall\&quot; as FIREWALL {\n\n    rectangle \&quot;WAN Interface\\nISP / Internet\\nExternal connection\&quot; as WAN\n\n    rectangle \&quot;LAN Interface\\n97.0.0.1/24\\nDefault Gateway\\nFirewall + NAT\&quot; as LAN\n\n    WAN --&gt; LAN\n}\n\nISP --&gt; WAN\n\n&#39; =========================================================\n&#39; INTERNAL BUSINESS SWITCH\n&#39; =========================================================\n\nnode \&quot;Business Ethernet Switch\\nLAN: 97.0.0.0/24\&quot; as SWITCH\n\nLAN --&gt; SWITCH : Protected LAN\n\n&#39; =========================================================\n&#39; WEB SERVER\n&#39; =========================================================\n\ndatabase \&quot;Business Web Server\\n\\nIP: 97.0.0.10/24\\nGateway: 97.0.0.1\\nHTTP/HTTPS\\nBusiness Website\&quot; as WEBSERVER\n\nSWITCH --&gt; WEBSERVER : Ethernet\n\n&#39; =========================================================\n&#39; STAFF WORKSTATIONS\n&#39; =========================================================\n\nrectangle \&quot;Business Manager\\nWorkstation\\n\\n97.0.0.20/24\\nGW: 97.0.0.1\&quot; as PC1\n\nrectangle \&quot;IT Support 1\\nWorkstation\\n\\n97.0.0.21/24\\nGW: 97.0.0.1\&quot; as PC2\n\nrectangle \&quot;IT Support 2\\nWorkstation\\n\\n97.0.0.22/24\\nGW: 97.0.0.1\&quot; as PC3\n\nrectangle \&quot;Business Consultant 1\\nWorkstation\\n\\n97.0.0.23/24\\nGW: 97.0.0.1\&quot; as PC4\n\nrectangle \&quot;Business Consultant 2\\nWorkstation\\n\\n97.0.0.24/24\\nGW: 97.0.0.1\&quot; as PC5\n\nrectangle \&quot;Business Consultant 3\\nWorkstation\\n\\n97.0.0.25/24\\nGW: 97.0.0.1\&quot; as PC6\n\nrectangle \&quot;Administration 1\\nWorkstation\\n\\n97.0.0.26/24\\nGW: 97.0.0.1\&quot; as PC7\n\nrectangle \&quot;Administration 2\\nWorkstation\\n\\n97.0.0.27/24\\nGW: 97.0.0.1\&quot; as PC8\n\n&#39; =========================================================\n&#39; STAFF CONNECTIONS\n&#39; =========================================================\n\nSWITCH --&gt; PC1\nSWITCH --&gt; PC2\nSWITCH --&gt; PC3\nSWITCH --&gt; PC4\nSWITCH --&gt; PC5\nSWITCH --&gt; PC6\nSWITCH --&gt; PC7\nSWITCH --&gt; PC8\n\n&#39; =========================================================\n&#39; NETWORK INFORMATION\n&#39; =========================================================\n\nnote right of SWITCH\nProduction LAN:\n97.0.0.0/24\n\nRouter:\n97.0.0.1\n\nWeb Server:\n97.0.0.10\n\nStaff:\n97.0.0.20 - 97.0.0.27\nend note\n\nnote bottom of FIREWALL\nOpenWrt provides:\n• Firewall protection\n• Network routing\n• NAT\n• Internet gateway\n• Controlled inbound/outbound traffic\nend note\n\n&#39; =========================================================\n&#39; PROJECT INFORMATION\n&#39; =========================================================\n\nlegend bottom\n|= Project Information |= Details |\n| Business | Brisbane IT &amp; Business Consultancy |\n| Student 1 | Pavan Reddy Chinthalapally - 12327397 |\n| Student 2 | Patel Ronak Ghanshyambhai - 12328755 |\n| Production Network | 97.0.0.0/24 |\n| Default Gateway | 97.0.0.1 |\n| Web Server | 97.0.0.10 |\n| Staff Workstations | 97.0.0.20 - 97.0.0.27 |\n| Network Security | OpenWrt Router / Firewall |\n\nendlegend\n\n@enduml&quot;,&#xa;  &quot;config&quot;: null&#xa;}" id="B-oQfpyck4zi2eZD34lQ-1">
+          <mxCell connectable="0" parent="1" style="group;transparentBounds=1;editIcon=1;lockedGroup=0;groupPadding=10;" vertex="1">
+            <mxGeometry as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="OpenWrt Router / Firewall" plantUmlId="c_0" plantUmlBaseStyle="shape=cube;size=10;fillColor=#EAF2F8;strokeColor=#2874A6;verticalAlign=top;align=center;spacingTop=12;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;strokeWidth=2;fontColor=#212529;fontFamily=Arial;" plantUmlBaseValue="OpenWrt Router / Firewall" id="B-oQfpyck4zi2eZD34lQ-2">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="shape=cube;size=10;fillColor=#EAF2F8;strokeColor=#2874A6;verticalAlign=top;align=center;spacingTop=12;fontSize=14;fontStyle=1;whiteSpace=wrap;shadow=0;strokeWidth=2;fontColor=#212529;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="257.7" width="210" x="557.21" y="263.75" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="WAN Interface&#xa;ISP / Internet&#xa;External connection" plantUmlId="n_1" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" plantUmlBaseValue="WAN Interface&#xa;ISP / Internet&#xa;External connection" id="B-oQfpyck4zi2eZD34lQ-3">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-2" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="62" width="170" x="15" y="40" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="LAN Interface&#xa;97.0.0.1/24&#xa;Default Gateway&#xa;Firewall + NAT" plantUmlId="n_2" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" plantUmlBaseValue="LAN Interface&#xa;97.0.0.1/24&#xa;Default Gateway&#xa;Firewall + NAT" id="B-oQfpyck4zi2eZD34lQ-4">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-2" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="78" width="143" x="27.98" y="162" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_16" plantUmlBaseStyle="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-18">
+          <mxCell edge="1" parent="B-oQfpyck4zi2eZD34lQ-2" source="B-oQfpyck4zi2eZD34lQ-3" style="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="B-oQfpyck4zi2eZD34lQ-4">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="INTERNET&#xa;External Network" plantUmlId="n_3" plantUmlBaseStyle="shape=cloud;fillColor=#E8F8F5;strokeColor=#138D75;whiteSpace=wrap;shadow=0;strokeWidth=2;fontFamily=Arial;" plantUmlBaseValue="INTERNET&#xa;External Network" id="B-oQfpyck4zi2eZD34lQ-5">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="shape=cloud;fillColor=#E8F8F5;strokeColor=#138D75;whiteSpace=wrap;shadow=0;strokeWidth=2;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="49" width="154" x="532.74" y="66" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="ISP&#xa;Internet Service Provider" plantUmlId="n_4" plantUmlBaseStyle="shape=cloud;fillColor=#E8F8F5;strokeColor=#138D75;whiteSpace=wrap;shadow=0;strokeWidth=2;fontFamily=Arial;" plantUmlBaseValue="ISP&#xa;Internet Service Provider" id="B-oQfpyck4zi2eZD34lQ-6">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="shape=cloud;fillColor=#E8F8F5;strokeColor=#138D75;whiteSpace=wrap;shadow=0;strokeWidth=2;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="49" width="210" x="504.7" y="191" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Business Ethernet Switch&#xa;LAN: 97.0.0.0/24" plantUmlId="n_5" plantUmlBaseStyle="shape=cube;size=10;fillColor=#EAF2F8;strokeColor=#2874A6;whiteSpace=wrap;shadow=0;strokeWidth=2;fontColor=#212529;fontFamily=Arial;" plantUmlBaseValue="Business Ethernet Switch&#xa;LAN: 97.0.0.0/24" id="B-oQfpyck4zi2eZD34lQ-7">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="shape=cube;size=10;fillColor=#EAF2F8;strokeColor=#2874A6;whiteSpace=wrap;shadow=0;strokeWidth=2;fontColor=#212529;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="49" width="206" x="708.52" y="646.2" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Business Web Server&#xa;&#xa;IP: 97.0.0.10/24&#xa;Gateway: 97.0.0.1&#xa;HTTP/HTTPS&#xa;Business Website" plantUmlId="n_6" plantUmlBaseStyle="shape=cylinder3;size=10;boundedLbl=1;backgroundOutline=1;fillColor=#FEF5E7;strokeColor=#B9770E;fontSize=14;whiteSpace=wrap;shadow=0;strokeWidth=2;fontFamily=Arial;" plantUmlBaseValue="Business Web Server&#xa;&#xa;IP: 97.0.0.10/24&#xa;Gateway: 97.0.0.1&#xa;HTTP/HTTPS&#xa;Business Website" id="B-oQfpyck4zi2eZD34lQ-8">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="shape=cylinder3;size=10;boundedLbl=1;backgroundOutline=1;fillColor=#FEF5E7;strokeColor=#B9770E;fontSize=14;whiteSpace=wrap;shadow=0;strokeWidth=2;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="131.8" width="154" x="1361" y="836.2" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Business Manager&#xa;Workstation&#xa;&#xa;97.0.0.20/24&#xa;GW: 97.0.0.1" plantUmlId="n_7" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" plantUmlBaseValue="Business Manager&#xa;Workstation&#xa;&#xa;97.0.0.20/24&#xa;GW: 97.0.0.1" id="B-oQfpyck4zi2eZD34lQ-9">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="94" width="161" x="1557" y="836.2" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="IT Support 1&#xa;Workstation&#xa;&#xa;97.0.0.21/24&#xa;GW: 97.0.0.1" plantUmlId="n_8" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" plantUmlBaseValue="IT Support 1&#xa;Workstation&#xa;&#xa;97.0.0.21/24&#xa;GW: 97.0.0.1" id="B-oQfpyck4zi2eZD34lQ-10">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="94" width="123" x="30" y="836.2" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="IT Support 2&#xa;Workstation&#xa;&#xa;97.0.0.22/24&#xa;GW: 97.0.0.1" plantUmlId="n_9" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" plantUmlBaseValue="IT Support 2&#xa;Workstation&#xa;&#xa;97.0.0.22/24&#xa;GW: 97.0.0.1" id="B-oQfpyck4zi2eZD34lQ-11">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="94" width="123" x="370" y="836.2" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Business Consultant 1&#xa;Workstation&#xa;&#xa;97.0.0.23/24&#xa;GW: 97.0.0.1" plantUmlId="n_10" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" plantUmlBaseValue="Business Consultant 1&#xa;Workstation&#xa;&#xa;97.0.0.23/24&#xa;GW: 97.0.0.1" id="B-oQfpyck4zi2eZD34lQ-12">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="94" width="182" x="927" y="836.2" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Business Consultant 2&#xa;Workstation&#xa;&#xa;97.0.0.24/24&#xa;GW: 97.0.0.1" plantUmlId="n_11" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" plantUmlBaseValue="Business Consultant 2&#xa;Workstation&#xa;&#xa;97.0.0.24/24&#xa;GW: 97.0.0.1" id="B-oQfpyck4zi2eZD34lQ-13">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="94" width="182" x="1144" y="836.2" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Business Consultant 3&#xa;Workstation&#xa;&#xa;97.0.0.25/24&#xa;GW: 97.0.0.1" plantUmlId="n_12" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" plantUmlBaseValue="Business Consultant 3&#xa;Workstation&#xa;&#xa;97.0.0.25/24&#xa;GW: 97.0.0.1" id="B-oQfpyck4zi2eZD34lQ-14">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="94" width="182" x="710" y="836.2" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Administration 1&#xa;Workstation&#xa;&#xa;97.0.0.26/24&#xa;GW: 97.0.0.1" plantUmlId="n_13" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" plantUmlBaseValue="Administration 1&#xa;Workstation&#xa;&#xa;97.0.0.26/24&#xa;GW: 97.0.0.1" id="B-oQfpyck4zi2eZD34lQ-15">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="94" width="147" x="188" y="836.2" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Administration 2&#xa;Workstation&#xa;&#xa;97.0.0.27/24&#xa;GW: 97.0.0.1" plantUmlId="n_14" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" plantUmlBaseValue="Administration 2&#xa;Workstation&#xa;&#xa;97.0.0.27/24&#xa;GW: 97.0.0.1" id="B-oQfpyck4zi2eZD34lQ-16">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="rounded=1;absoluteArcSize=1;arcSize=3;strokeWidth=2;fillColor=#F8F9FA;strokeColor=#343A40;whiteSpace=wrap;shadow=0;fontColor=#212529;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="94" width="147" x="528" y="836.2" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Internet connection" plantUmlId="e_15" plantUmlBaseStyle="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="Internet connection" id="B-oQfpyck4zi2eZD34lQ-17">
+          <mxCell edge="1" parent="B-oQfpyck4zi2eZD34lQ-1" source="B-oQfpyck4zi2eZD34lQ-5" style="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="B-oQfpyck4zi2eZD34lQ-6">
+            <mxGeometry relative="1" as="geometry">
+              <mxPoint x="69" as="offset" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_17" plantUmlBaseStyle="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-19">
+          <mxCell edge="1" parent="B-oQfpyck4zi2eZD34lQ-1" source="B-oQfpyck4zi2eZD34lQ-6" style="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="B-oQfpyck4zi2eZD34lQ-3">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Protected LAN" plantUmlId="e_18" plantUmlBaseStyle="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="Protected LAN" id="B-oQfpyck4zi2eZD34lQ-20">
+          <mxCell edge="1" parent="B-oQfpyck4zi2eZD34lQ-1" source="B-oQfpyck4zi2eZD34lQ-4" style="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="B-oQfpyck4zi2eZD34lQ-7">
+            <mxGeometry relative="1" as="geometry">
+              <mxPoint x="37" y="-22" as="offset" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="Ethernet" plantUmlId="e_19" plantUmlBaseStyle="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=1;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="Ethernet" id="B-oQfpyck4zi2eZD34lQ-21">
+          <mxCell edge="1" parent="B-oQfpyck4zi2eZD34lQ-1" source="B-oQfpyck4zi2eZD34lQ-7" style="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;labelBackgroundColor=#FFFFFF;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=1;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="B-oQfpyck4zi2eZD34lQ-8">
+            <mxGeometry relative="1" as="geometry">
+              <mxPoint x="47" y="13" as="offset" />
+              <Array as="points">
+                <mxPoint x="1132.1" y="790.8" />
+              </Array>
+              <mxPoint x="812.02" y="761.19" as="sourcePoint" />
+              <mxPoint x="1441.5" y="836.2" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_20" plantUmlBaseStyle="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=1;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-22">
+          <mxCell edge="1" parent="B-oQfpyck4zi2eZD34lQ-1" source="B-oQfpyck4zi2eZD34lQ-7" style="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=1;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="B-oQfpyck4zi2eZD34lQ-9">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="1637.5" y="798.2" />
+              </Array>
+              <mxPoint x="812.02" y="761.19" as="sourcePoint" />
+              <mxPoint x="1637.5" y="836.2" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_21" plantUmlBaseStyle="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=1;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-23">
+          <mxCell edge="1" parent="B-oQfpyck4zi2eZD34lQ-1" source="B-oQfpyck4zi2eZD34lQ-7" style="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=1;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="B-oQfpyck4zi2eZD34lQ-10">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="457.38" y="798.2" />
+              </Array>
+              <mxPoint x="812.02" y="761.19" as="sourcePoint" />
+              <mxPoint x="91.5" y="836.2" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_22" plantUmlBaseStyle="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-24">
+          <mxCell edge="1" parent="B-oQfpyck4zi2eZD34lQ-1" source="B-oQfpyck4zi2eZD34lQ-7" style="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="B-oQfpyck4zi2eZD34lQ-11">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_23" plantUmlBaseStyle="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-25">
+          <mxCell edge="1" parent="B-oQfpyck4zi2eZD34lQ-1" source="B-oQfpyck4zi2eZD34lQ-7" style="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="B-oQfpyck4zi2eZD34lQ-12">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_24" plantUmlBaseStyle="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=1;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-26">
+          <mxCell edge="1" parent="B-oQfpyck4zi2eZD34lQ-1" source="B-oQfpyck4zi2eZD34lQ-7" style="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=1;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="B-oQfpyck4zi2eZD34lQ-13">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="1028.9" y="798.2" />
+              </Array>
+              <mxPoint x="812.02" y="761.19" as="sourcePoint" />
+              <mxPoint x="1235" y="836.2" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_25" plantUmlBaseStyle="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-27">
+          <mxCell edge="1" parent="B-oQfpyck4zi2eZD34lQ-1" source="B-oQfpyck4zi2eZD34lQ-7" style="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="B-oQfpyck4zi2eZD34lQ-14">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_26" plantUmlBaseStyle="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=1;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-28">
+          <mxCell edge="1" parent="B-oQfpyck4zi2eZD34lQ-1" source="B-oQfpyck4zi2eZD34lQ-7" style="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=1;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="B-oQfpyck4zi2eZD34lQ-15">
+            <mxGeometry relative="1" as="geometry">
+              <Array as="points">
+                <mxPoint x="542.36" y="798.2" />
+              </Array>
+              <mxPoint x="812.02" y="761.19" as="sourcePoint" />
+              <mxPoint x="261.5" y="836.2" as="targetPoint" />
+            </mxGeometry>
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="e_27" plantUmlBaseStyle="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-29">
+          <mxCell edge="1" parent="B-oQfpyck4zi2eZD34lQ-1" source="B-oQfpyck4zi2eZD34lQ-7" style="strokeColor=#34495E;fontColor=#000000;fontSize=12;html=1;endArrow=classicThin;endFill=1;strokeWidth=2;fontFamily=Arial;curved=0;rounded=0;endSize=6;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" target="B-oQfpyck4zi2eZD34lQ-16">
+            <mxGeometry relative="1" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Production LAN:&#xa;97.0.0.0/24&#xa;&#xa;Router:&#xa;97.0.0.1&#xa;&#xa;Web Server:&#xa;97.0.0.10&#xa;&#xa;Staff:&#xa;97.0.0.20 - 97.0.0.27" plantUmlId="note_28" plantUmlBaseStyle="shape=note;size=10;fillColor=#FEFFDD;strokeColor=#181818;fontSize=13;whiteSpace=wrap;align=left;spacingLeft=4;shadow=0;fontFamily=Arial;" plantUmlBaseValue="Production LAN:&#xa;97.0.0.0/24&#xa;&#xa;Router:&#xa;97.0.0.1&#xa;&#xa;Web Server:&#xa;97.0.0.10&#xa;&#xa;Staff:&#xa;97.0.0.20 - 97.0.0.27" id="B-oQfpyck4zi2eZD34lQ-30">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="shape=note;size=10;fillColor=#FEFFDD;strokeColor=#181818;fontSize=13;whiteSpace=wrap;align=left;spacingLeft=4;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="178" width="147" x="949.3" y="582.2" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="noteptr_29" plantUmlBaseStyle="shape=triangle;fillColor=#FEFFDD;strokeColor=#181818;strokeWidth=0.5;shadow=0;fontFamily=Arial;direction=west;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-31">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="shape=triangle;fillColor=#FEFFDD;strokeColor=#181818;strokeWidth=0.5;shadow=0;fontFamily=Arial;direction=west;" vertex="1">
+            <mxGeometry height="8" width="35.78" x="914.52" y="667.2" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="OpenWrt provides:&#xa;• Firewall protection&#xa;• Network routing&#xa;• NAT&#xa;• Internet gateway&#xa;• Controlled inbound/outbound traffic" plantUmlId="note_30" plantUmlBaseStyle="shape=note;size=10;fillColor=#FEFFDD;strokeColor=#181818;fontSize=13;whiteSpace=wrap;align=left;spacingLeft=4;shadow=0;fontFamily=Arial;" plantUmlBaseValue="OpenWrt provides:&#xa;• Firewall protection&#xa;• Network routing&#xa;• NAT&#xa;• Internet gateway&#xa;• Controlled inbound/outbound traffic" id="B-oQfpyck4zi2eZD34lQ-32">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="shape=note;size=10;fillColor=#FEFFDD;strokeColor=#181818;fontSize=13;whiteSpace=wrap;align=left;spacingLeft=4;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="102" width="250" x="802.64" y="341.6" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="noteptr_31" plantUmlBaseStyle="shape=triangle;fillColor=#FEFFDD;strokeColor=#181818;strokeWidth=0.5;shadow=0;fontFamily=Arial;direction=west;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-33">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="shape=triangle;fillColor=#FEFFDD;strokeColor=#181818;strokeWidth=0.5;shadow=0;fontFamily=Arial;direction=west;" vertex="1">
+            <mxGeometry height="8" width="36.43" x="767.21" y="388.6" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;font style=&quot;font-size: 19px;&quot;&gt;COIT20246 - Proposed Small Business Production Network&lt;/font&gt;" plantUmlId="title_32" plantUmlBaseStyle="text;html=1;fillColor=none;strokeColor=none;fontSize=14;fontStyle=1;fontColor=#000000;align=center;verticalAlign=middle;fontFamily=Arial;" plantUmlBaseValue="COIT20246 - Proposed Small Business Production Network" id="B-oQfpyck4zi2eZD34lQ-34">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="text;html=1;fillColor=none;strokeColor=none;fontSize=14;fontStyle=1;fontColor=#000000;align=center;verticalAlign=middle;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="24" width="421" x="664" y="30" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legend_0" plantUmlBaseStyle="rounded=1;absoluteArcSize=1;arcSize=15;fillColor=#DDDDDD;strokeColor=#000000;strokeWidth=1;fontColor=#000000;fontSize=14;align=left;verticalAlign=top;spacing=0;spacingLeft=5;spacingTop=5;whiteSpace=wrap;html=1;container=1;collapsible=0;shadow=0;fontFamily=Arial;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-35">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-1" style="rounded=1;absoluteArcSize=1;arcSize=15;fillColor=#DDDDDD;strokeColor=#000000;strokeWidth=1;fontColor=#000000;fontSize=14;align=left;verticalAlign=top;spacing=0;spacingLeft=5;spacingTop=5;whiteSpace=wrap;html=1;container=1;collapsible=0;shadow=0;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="193" width="448" x="650" y="952" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendtable_1" plantUmlBaseStyle="shape=table;childLayout=tableLayout;container=1;collapsible=0;startSize=0;rowLines=1;fixedRows=1;resizeLast=1;fillColor=none;strokeColor=#000000;strokeWidth=1;fontSize=14;whiteSpace=wrap;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-36">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-35" style="shape=table;childLayout=tableLayout;container=1;collapsible=0;startSize=0;rowLines=1;fixedRows=1;resizeLast=1;fillColor=none;strokeColor=#000000;strokeWidth=1;fontSize=14;whiteSpace=wrap;" vertex="1">
+            <mxGeometry height="162" width="438" x="5" y="7" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_2" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-37">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-36" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="438" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Project Information" plantUmlId="legendcell_3" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;fontStyle=1;" plantUmlBaseValue="Project Information" id="B-oQfpyck4zi2eZD34lQ-38">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-37" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;fontStyle=1;" vertex="1">
+            <mxGeometry height="18" width="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Details" plantUmlId="legendcell_4" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;fontStyle=1;" plantUmlBaseValue="Details" id="B-oQfpyck4zi2eZD34lQ-39">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-37" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;fontStyle=1;" vertex="1">
+            <mxGeometry height="18" width="289" x="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_5" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-40">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-36" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="438" y="18" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Business" plantUmlId="legendcell_6" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="Business" id="B-oQfpyck4zi2eZD34lQ-41">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-40" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Brisbane IT &amp;amp; Business Consultancy" plantUmlId="legendcell_7" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="Brisbane IT &amp;amp; Business Consultancy" id="B-oQfpyck4zi2eZD34lQ-42">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-40" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="289" x="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_8" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-43">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-36" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="438" y="36" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Student 1" plantUmlId="legendcell_9" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="Student 1" id="B-oQfpyck4zi2eZD34lQ-44">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-43" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Pavan Reddy Chinthalapally - 12327397" plantUmlId="legendcell_10" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="Pavan Reddy Chinthalapally - 12327397" id="B-oQfpyck4zi2eZD34lQ-45">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-43" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="289" x="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_11" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-46">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-36" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="438" y="54" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Student 2" plantUmlId="legendcell_12" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="Student 2" id="B-oQfpyck4zi2eZD34lQ-47">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-46" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Patel Ronak Ghanshyambhai - 12328755" plantUmlId="legendcell_13" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="Patel Ronak Ghanshyambhai - 12328755" id="B-oQfpyck4zi2eZD34lQ-48">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-46" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="289" x="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_14" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-49">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-36" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="438" y="72" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Production Network" plantUmlId="legendcell_15" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="Production Network" id="B-oQfpyck4zi2eZD34lQ-50">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-49" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="97.0.0.0/24" plantUmlId="legendcell_16" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="97.0.0.0/24" id="B-oQfpyck4zi2eZD34lQ-51">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-49" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="289" x="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_17" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-52">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-36" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="438" y="90" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Default Gateway" plantUmlId="legendcell_18" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="Default Gateway" id="B-oQfpyck4zi2eZD34lQ-53">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-52" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="97.0.0.1" plantUmlId="legendcell_19" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="97.0.0.1" id="B-oQfpyck4zi2eZD34lQ-54">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-52" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="289" x="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_20" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-55">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-36" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="438" y="108" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Web Server" plantUmlId="legendcell_21" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="Web Server" id="B-oQfpyck4zi2eZD34lQ-56">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-55" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="97.0.0.10" plantUmlId="legendcell_22" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="97.0.0.10" id="B-oQfpyck4zi2eZD34lQ-57">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-55" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="289" x="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_23" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-58">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-36" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="438" y="126" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Staff Workstations" plantUmlId="legendcell_24" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="Staff Workstations" id="B-oQfpyck4zi2eZD34lQ-59">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-58" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="97.0.0.20 - 97.0.0.27" plantUmlId="legendcell_25" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="97.0.0.20 - 97.0.0.27" id="B-oQfpyck4zi2eZD34lQ-60">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-58" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="289" x="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendrow_26" plantUmlBaseStyle="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-61">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-36" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;collapsible=0;dropTarget=0;strokeColor=#000000;top=0;left=0;right=0;bottom=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fillColor=none;" vertex="1">
+            <mxGeometry height="18" width="438" y="144" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Network Security" plantUmlId="legendcell_27" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="Network Security" id="B-oQfpyck4zi2eZD34lQ-62">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-61" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=1;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="OpenWrt Router / Firewall" plantUmlId="legendcell_28" plantUmlBaseStyle="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" plantUmlBaseValue="OpenWrt Router / Firewall" id="B-oQfpyck4zi2eZD34lQ-63">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-61" style="shape=partialRectangle;connectable=0;overflow=hidden;fillColor=none;top=0;left=0;bottom=0;right=0;strokeColor=#000000;whiteSpace=wrap;html=1;fontSize=14;fontColor=#000000;align=left;spacing=0;spacingLeft=4;verticalAlign=middle;" vertex="1">
+            <mxGeometry height="18" width="289" x="149" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" plantUmlId="legendtext_29" plantUmlBaseStyle="text;html=1;strokeColor=none;fillColor=none;fontColor=#000000;fontSize=14;align=left;verticalAlign=top;spacing=0;whiteSpace=wrap;fontFamily=Arial;" plantUmlBaseValue="" id="B-oQfpyck4zi2eZD34lQ-64">
+          <mxCell parent="B-oQfpyck4zi2eZD34lQ-35" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#000000;fontSize=14;align=left;verticalAlign=top;spacing=0;whiteSpace=wrap;fontFamily=Arial;" vertex="1">
+            <mxGeometry height="17" width="438" x="5" y="171" as="geometry" />
+          </mxCell>
+        </UserObject>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
